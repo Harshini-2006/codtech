@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #4f46e5;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .container {
+            padding: 2rem;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 10px;
+            background: #4f46e5;
+            width: 0%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Learnify</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">About</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Popular Courses</h2>
+        <div class="course-grid" id="courseGrid">
+            <!-- Course cards will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const courses = [
+            {
+                title: "HTML & CSS Basics",
+                description: "Learn how to build beautiful websites from scratch.",
+                video: "https://www.youtube.com/embed/UB1O30fR-EE",
+                progress: 70
+            },
+            {
+                title: "JavaScript for Beginners",
+                description: "Understand the core concepts of JavaScript programming.",
+                video: "https://www.youtube.com/embed/W6NZfCO5SIk",
+                progress: 45
+            },
+            {
+                title: "React Essentials",
+                description: "Create powerful user interfaces with React.",
+                video: "https://www.youtube.com/embed/bMknfKXIFA8",
+                progress: 60
+            },
+            {
+                title: "Python for Data Science",
+                description: "Analyze data and build machine learning models.",
+                video: "https://www.youtube.com/embed/rfscVS0vtbw",
+                progress: 30
+            }
+        ];
+
+        const courseGrid = document.getElementById('courseGrid');
+
+        courses.forEach(course => {
+            const card = document.createElement('div');
+            card.className = 'course-card';
+
+            const title = document.createElement('h3');
+            title.textContent = course.title;
+
+            const desc = document.createElement('p');
+            desc.textContent = course.description;
+
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'video-container';
+            videoWrapper.innerHTML = `<iframe src="${course.video}" frameborder="0" allowfullscreen></iframe>`;
+
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress-bar';
+            const progressFill = document.createElement('div');
+            progressFill.className = 'progress-bar-fill';
+            progressFill.style.width = course.progress + '%';
+            progressBar.appendChild(progressFill);
+
+            const btn = document.createElement('a');
+            btn.className = 'btn';
+            btn.textContent = 'Continue Learning';
+            btn.href = '#';
+
+            card.appendChild(title);
+            card.appendChild(desc);
+            card.appendChild(videoWrapper);
+            card.appendChild(progressBar);
+            card.appendChild(btn);
+
+            courseGrid.appendChild(card);
+        });
+    </script>
+</body>
+
+</html>
